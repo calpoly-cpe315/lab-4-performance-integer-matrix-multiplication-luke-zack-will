@@ -1,5 +1,5 @@
 # cpe315-matmul
-## Your name(s) here
+## Zack Soucek, Luke Rowe, William Woodward
 
 ### To build:
 ```shell
