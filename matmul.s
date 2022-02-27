@@ -31,8 +31,16 @@
 	.arch armv8-a
 	.global matmul
 matmul:
+    stp x19, x20, [sp, -16]
+    stp x21, x22, [sp, -32]
+    stp x23, x24, [sp, -48]
+    stp x25, x26, [sp, -64]
+    stp x27, x28, [sp, -80]
+    stp x29, x30, [sp, -96]! // FP, LR
 
-/*planning variables
+
+/*
+    planning variables
 	 counter i, x19
 	 counter j, x20
 	 counter k, x21
@@ -43,4 +51,13 @@ matmul:
 	 interemediate total, x26
 */
 
-
+    // save orig
+    mov x19, x0
+    mov x20, x1
+    mov x21, x2
+    mov x22, x3
+    mov x23, x4
+    mov x24, x5
+    mov x25, x6
+    mov x26, x7
+ret
