@@ -2,7 +2,7 @@
 // You're implementing the following function in ARM Assembly
 //! C = A * B
 //! @param C          result matrix
-//! @param A          matrix A 
+//! @param A          matrix A
 //! @param B          matrix B
 //! @param hA         height of matrix A
 //! @param wA         width of matrix A, height of matrix B
@@ -12,9 +12,9 @@
 //  they have all been allocated linearly. This means that the elements
 //  in each row are sequential in memory, and that the first element
 //  of the second row immedialely follows the last element in the first
-//  row, etc. 
+//  row, etc.
 //
-//void matmul(int* C, const int* A, const int* B, unsigned int hA, 
+//void matmul(int* C, const int* A, const int* B, unsigned int hA,
 //    unsigned int wA, unsigned int wB)
 //{
 //  for (unsigned int i = 0; i < hA; ++i)
@@ -31,4 +31,16 @@
 	.arch armv8-a
 	.global matmul
 matmul:
+
+/*planning variables
+	 counter i, x19
+	 counter j, x20
+	 counter k, x21
+	 stored input ha, x22
+	 stored intput wa, x23
+	 stored input wb, x24
+	 sum, x25
+	 interemediate total, x26
+*/
+
 
