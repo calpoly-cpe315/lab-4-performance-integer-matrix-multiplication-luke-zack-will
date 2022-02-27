@@ -41,14 +41,17 @@ matmul:
 
 /*
     planning variables
-	 counter i, x19
-	 counter j, x20
-	 counter k, x21
-	 stored input ha, x22
-	 stored intput wa, x23
-	 stored input wb, x24
-	 sum, x25
-	 interemediate total, x26
+         x19: C, result matrix
+         x20: A, matrix A
+	 x21: B, matrix B
+	 x22: hA, height of matrix A
+	 x23: wA, width of matrix A, height of matrix B
+	 x24: wb, width of matrix B
+	 x25: counter i
+	 x26: counter j
+	 x27: counter k
+	 x28: sum
+
 */
 
     // save orig
