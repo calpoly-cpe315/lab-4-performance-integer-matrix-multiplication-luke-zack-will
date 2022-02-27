@@ -3,7 +3,7 @@ CC = gcc
 CXXFLAGS = -ggdb -Wall -O2 
 CFLAGS = -ggdb -Wall 
 CXXSRCS = matmul-driver.cpp 
-ASRCS = matmul.s intmul.s intadd.s 
+ASRCS = matmul.s intmul.s intadd.s intsub.s
 BIN = mm
 
 all:

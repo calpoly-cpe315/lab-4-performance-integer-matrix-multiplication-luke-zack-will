@@ -1,9 +1,9 @@
     // intadd function in this file
 
     .arch armv8-a
-    .global intadd
+    .global intsub
 
-intadd:
+intsub:
     str x19, [sp, -16]
     stp x20, x21, [sp, -32]
     stp x29, x30, [sp, -48]! // store FP
@@ -13,10 +13,9 @@ intadd:
 
 loop:
 
+    eor x19, x19, x20 // xor, before and, inverts bits
+
     and x21, x19, x20 // and, for carry digits
-
-    eor x19, x19, x20 // xor, contains final result once no carry
-
     lsl x20, x21, #1 // make B contain carry, shift by 1
 
     cmp x20, #0 // if there are carries
