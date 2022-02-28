@@ -53,7 +53,6 @@ matmul:
 	 x28: sum
 
 */
-
     // save orig
     mov x19, x0
     mov x20, x1
@@ -62,12 +61,65 @@ matmul:
     mov x23, x4
     mov x24, x5
 
+mov x25, x31//zero i
+iloop:
+
+
+
+	mov x26, x31//zero j
+	jloop:
+	mov x28, x31 //sum = 0
+
+
+		mov x27, x31//zero k
+		kloop:
+
+
+
+
+		//end of kloop
+		//k < Wa
+		cmp x27, x23
+		b.ge endkloop
+		mov x0, x27
+		mov x1, #1
+		bl intadd
+		mov x27, x0
+		b kloop
+		endkloop:
+
+
+	//end of jloop
+	//j < Wa
+	cmp x26, x24
+	b.ge endjloop
+	//j++
+	mov x0, x26
+	mov x1, #1
+	bl intadd
+	mov x26, x0
+	b jloop
+	endjloop:
+
+//end of iloop
+//i < Ha
+cmp x25, x22
+b.ge ending
+//i++
+mov x0, x25
+mov x1, #1
+bl intadd
+mov x25, x0
+b iloop
+
+
+ending:
+
 ldp x19, x20, [sp, 16]
 ldp x21, x22, [sp, 32]
 ldp x23, x24, [sp, 48]
 ldp x25, x26, [sp, 64]
 ldp x27, x28, [sp, 80]
 ldp x29, x30, [sp], 96 // ld FP, LR
-
 
 ret
