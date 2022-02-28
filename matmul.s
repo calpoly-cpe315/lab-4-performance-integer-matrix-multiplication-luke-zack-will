@@ -46,7 +46,7 @@ matmul:
 	 x21: B, matrix B
 	 x22: hA, height of matrix A
 	 x23: wA, width of matrix A, height of matrix B
-	 x24: wb, width of matrix B
+	 x24: wB, width of matrix B
 	 x25: counter i
 	 x26: counter j
 	 x27: counter k
@@ -91,9 +91,20 @@ iloop:
 		mov x27, x0
 		b kloop
 		endkloop:
-
 		//      C[i * wB + j] = sum;
+                // i * wB
+		mov x0, x25
+		mov x1, x24
+		bl intmul
+		// + j
+		mov x1, x26
+		bl intadd
 
+		ldr x1, x19 // store array in x1
+		lsl x0, x0, #2 // index * 4 for array offset for ints
+		add x0, x1, x0 // now has element addr
+		str x28, [x0] // store sum at mem location... c[prev calc]
+		
 
 
 	//end of jloop
