@@ -75,6 +75,10 @@ iloop:
 		kloop:
 
 
+		//        sum += A[i * wA + k] * B[k * wB + j];
+
+
+
 
 
 		//end of kloop
@@ -87,6 +91,9 @@ iloop:
 		mov x27, x0
 		b kloop
 		endkloop:
+
+		//      C[i * wB + j] = sum;
+
 
 
 	//end of jloop
