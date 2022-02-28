@@ -61,17 +61,17 @@ matmul:
     mov x23, x4
     mov x24, x5
 
-mov x25, x31//zero i
+mov x25, #0//zero i
 iloop:
 
 
 
-	mov x26, x31//zero j
+	mov x26, #0//zero j
 	jloop:
-	mov x28, x31 //sum = 0
+	mov x28, #0 //sum = 0
 
 
-		mov x27, x31//zero k
+		mov x27, #0//zero k
 		kloop:
 
 
