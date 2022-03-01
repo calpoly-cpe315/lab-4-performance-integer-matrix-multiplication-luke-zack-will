@@ -76,7 +76,19 @@ iloop:
 
 
 		//        sum += A[i * wA + k] * B[k * wB + j];
+		mov x0, x25//i
+		mov x1, x22//wa
+		bl intmul//i * wa
+		mov x1, x27//k
+		bl intadd//+k
+		lsl x0, x0 , #2//index * = int offset in array
+		ldr x1, x20//store array in x1
+		bl intadd//now element addr
 
+
+		//oh shit we need intermediate now
+		str x0, [sp, 8]//stores the value pulled from the first array
+		
 
 
 
@@ -100,8 +112,8 @@ iloop:
 		mov x1, x26
 		bl intadd
 
-		ldr x1, x19 // store array in x1
 		lsl x0, x0, #2 // index * 4 for array offset for ints
+		ldr x1, x19 // store array in x1
 		bl intadd // now has element addr, switched in our add function in pace of add instrction
 		str x28, [x0] // store sum at mem location... c[prev calc]
 
