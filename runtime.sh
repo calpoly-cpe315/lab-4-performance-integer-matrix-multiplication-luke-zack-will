@@ -1,1 +1,1 @@
-perf -stat ./mm 1>p.out 2>perf.out
+perf stat ./mm 1>p.out 2>perf.out

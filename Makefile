@@ -1,8 +1,8 @@
 CXX = g++
 CC = gcc
-CXXFLAGS = -ggdb -Wall -O2 
-CFLAGS = -ggdb -Wall 
-CXXSRCS = matmul-driver.cpp 
+CXXFLAGS = -ggdb -Wall -O2
+CFLAGS = -ggdb -Wall
+CXXSRCS = matmul-driver.cpp
 ASRCS = matmul.s intmul.s intadd.s intsub.s
 BIN = mm
 
@@ -12,4 +12,4 @@ all:
 	$(CC) $(CFLAGS) -o $(BIN) *.o
 
 clean:
-	rm -f *.o $(BIN)
+	rm -f *.o  p.out perf.out $(BIN)
