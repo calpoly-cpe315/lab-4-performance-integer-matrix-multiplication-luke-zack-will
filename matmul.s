@@ -42,9 +42,9 @@ matmul:
 
 /*
     planning variables
-         x19: C, result matrix
-         x20: A, matrix A
-	 x21: B, matrix B
+         sp88: C, result matrix
+         sp96: A, matrix A
+	 sp104: B, matrix B
 	 x22: hA, height of matrix A
 	 x23: wA, width of matrix A, height of matrix B
 	 x24: wB, width of matrix B
