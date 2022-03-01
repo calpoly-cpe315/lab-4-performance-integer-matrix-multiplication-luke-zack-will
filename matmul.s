@@ -31,7 +31,7 @@
     .arch armv8-a
     .global matmul
 matmul:
-    stp x29, x30, [sp, -112]!
+    stp x29, x30, [sp, -128]!
     mov x29, sp
     stp x19, x20, [sp, 16]
     stp x21, x22, [sp, 32]
@@ -64,12 +64,12 @@ matmul:
 
 iloop:
     mov x26, #0//zero j
-    
+
     jloop:
         mov x28, #0 //sum = 0
         mov x27, #0//zero k
-        
-	kloop:
+
+	    kloop:
             //        sum += A[i * wA + k] * B[k * wB + j];
             mov x0, x25 // i
             mov x1, x22 // wa
@@ -147,7 +147,7 @@ ending:
     ldp x23, x24, [sp, 48]
     ldp x25, x26, [sp, 64]
     ldp x27, x28, [sp, 80]
-    ldp x29, x30, [sp], 112 // ld FP, LR
+    ldp x29, x30, [sp], 128 // ld FP, LR
 
 ret
 
