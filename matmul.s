@@ -84,14 +84,14 @@ iloop:
 		lsl x0, x0 , #2 //index * = int offset in array
 
 		mov x6, x0 // store to B array
-                
+
                 mov x0, x27 // k
 		mov x1, x24 // wB
 		bl intmul // k * wB
 		mov x1, x26 // j
 		bl intadd // += j
                 lsl x0, x0, #2
-		
+
 		mov x1, x6
 		bl intmul // A[etc] * B[etc]
 
@@ -101,10 +101,7 @@ iloop:
 
 		str x0, [sp, 8]//stores the value pulled from the first array
 
-		
-
-    		mov w28, #25
-
+	
 
 		//end of kloop
 		//k < Wa
