@@ -92,7 +92,7 @@ iloop:
 		b kloop
 		endkloop:
 		//      C[i * wB + j] = sum;
-                // i * wB
+      // i * wB
 		mov x0, x25
 		mov x1, x24
 		bl intmul
@@ -102,9 +102,9 @@ iloop:
 
 		ldr x1, x19 // store array in x1
 		lsl x0, x0, #2 // index * 4 for array offset for ints
-		add x0, x1, x0 // now has element addr
+		bl intadd // now has element addr, switched in our add function in pace of add instrction
 		str x28, [x0] // store sum at mem location... c[prev calc]
-		
+
 
 
 	//end of jloop
