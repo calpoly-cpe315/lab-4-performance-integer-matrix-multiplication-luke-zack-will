@@ -76,22 +76,25 @@ iloop:
             bl intmul //i * wa
             mov x1, x27 // k
             bl intadd // +=k
+            //x0 now has the index
             lsl x0, x0 , #2 //index * = int offset in array
-            mov x6, x0 // store to B array
+            ldr x9, [x20, x0]//saves A[index x0] into x9
 
             mov x0, x27 // k
             mov x1, x24 // wB
             bl intmul // k * wB
             mov x1, x26 // j
             bl intadd // += j
-            lsl x0, x0, #2
+            lsl x0, x0, #2//index shifted by int offset
+            ldr x10, [x21, x0]//saves B[index x0] into x10
 
-            mov x1, x6
+            mov x0, x9
+            mov x1, x10
             bl intmul // A[etc] * B[etc]
 
             mov x1, x28 // sum
             bl intadd // summate
-            mov x28, x0
+            mov x28, x0//should be math'd out right
 
 
         //end of kloop
