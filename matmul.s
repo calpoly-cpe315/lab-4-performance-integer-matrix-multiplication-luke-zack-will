@@ -31,7 +31,7 @@
 	.arch armv8-a
 	.global matmul
 matmul:
-    stp x29, x30, [sp, -128]!
+    stp x29, x30, [sp, -96]!
 	mov x29, sp
 	stp x19, x20, [sp, 16]
 	stp x21, x22, [sp, 32]
@@ -156,7 +156,7 @@ ldp x21, x22, [sp, 32]
 ldp x23, x24, [sp, 48]
 ldp x25, x26, [sp, 64]
 ldp x27, x28, [sp, 80]
-ldp x29, x30, [sp], 128 // ld FP, LR
+ldp x29, x30, [sp], 96 // ld FP, LR
 
 ret
 
