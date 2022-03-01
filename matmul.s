@@ -61,7 +61,6 @@ matmul:
     mov x22, x3
     mov x23, x4
     mov x24, x5
-    mov x28, #25
 
 
 mov x25, #0//zero i
@@ -93,6 +92,8 @@ iloop:
 		str x0, [sp, 8]//stores the value pulled from the first array
 
 		*/
+
+    		mov x28, #25
 
 
 		//end of kloop
