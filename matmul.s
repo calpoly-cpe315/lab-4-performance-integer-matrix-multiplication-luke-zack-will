@@ -99,9 +99,6 @@ iloop:
 		bl intadd // summate
 		mov x28, x0
 
-		str x0, [sp, 8]//stores the value pulled from the first array
-
-	
 
 		//end of kloop
 		//k < Wa
