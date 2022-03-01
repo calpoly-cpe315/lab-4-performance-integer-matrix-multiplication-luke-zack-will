@@ -16,6 +16,15 @@ intmul:
     cmp x1, #0
     beq zero // check if 0
 
+    cmp x0, x1
+    bgt swapskip // if greater don't use as incrementor
+
+    mov x23, x1
+    mov x1, x0
+    mov x0, x23 
+
+    swapskip:
+    
     mov x23, x0 // A, base value
     mov x24, x1 // B, iterations of loop
 
