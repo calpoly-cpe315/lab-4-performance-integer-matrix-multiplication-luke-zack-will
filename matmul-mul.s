@@ -30,7 +30,7 @@
 
     .arch armv8-a
     .global matmul
-matmul-mul:
+matmul:
     stp x29, x30, [sp, -128]!
     mov x29, sp
     stp x19, x20, [sp, 16]
