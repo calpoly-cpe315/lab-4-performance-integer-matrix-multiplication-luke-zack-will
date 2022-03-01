@@ -74,7 +74,7 @@ iloop:
 		mov x27, #0//zero k
 		kloop:
 
-
+/*
 		//        sum += A[i * wA + k] * B[k * wB + j];
 		mov x0, x25//i
 		mov x1, x22//wa
@@ -88,7 +88,9 @@ iloop:
 
 		//oh shit we need intermediate now
 		str x0, [sp, 8]//stores the value pulled from the first array
-		
+
+		*/
+		mov x28, #25
 
 
 
