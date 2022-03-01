@@ -36,7 +36,7 @@ matmul:
     stp x23, x24, [sp, -48]
     stp x25, x26, [sp, -64]
     stp x27, x28, [sp, -80]
-    stp x29, x30, [sp, -96]! // str FP, LR
+    stp x29, x30, [sp, -128]! // str FP, LR
 
 
 /*
@@ -54,9 +54,9 @@ matmul:
 
 */
     // save orig
-    mov x19, x0
-    mov x20, x1
-    mov x21, x2
+    str x0, [sp, 88]
+	 str x1, [sp, 96]
+	 str x2, [sp, 104]
     mov x22, x3
     mov x23, x4
     mov x24, x5
@@ -152,7 +152,7 @@ ldp x21, x22, [sp, 32]
 ldp x23, x24, [sp, 48]
 ldp x25, x26, [sp, 64]
 ldp x27, x28, [sp, 80]
-ldp x29, x30, [sp], 96 // ld FP, LR
+ldp x29, x30, [sp], 128 // ld FP, LR
 
 ret
 
