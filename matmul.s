@@ -91,8 +91,9 @@ iloop:
 		mov x1, x26 // j
 		bl intadd // += j
                 lsl x0, x0, #2
-
-		intmul x0, x6 // A[etc] * B[etc]
+		
+		mov x1, x6
+		bl intmul // A[etc] * B[etc]
 
 		mov x1, x28 // sum
 		bl intadd // summate
