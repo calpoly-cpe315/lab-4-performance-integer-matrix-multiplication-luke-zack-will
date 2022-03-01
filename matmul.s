@@ -117,7 +117,7 @@ iloop:
 		lsl x0, x0, #2 // index * 4 for array offset for ints
 
 		ldr x19, [sp, -16]
-		str w28, [x19, x0]
+		str x28, [x19, x0]
 
 
 
