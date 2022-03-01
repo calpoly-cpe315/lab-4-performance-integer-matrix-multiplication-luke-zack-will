@@ -24,9 +24,8 @@ loop:
     bne loop // branch if not equal
 
 mov x0, x19 // results of final eor
-ldr x19, [sp, 16] // load x19
-
-ldp x20, x21, [sp, 32] // load x20, x21
+ldp x19, x20 [sp, 16] // load x19, 20
+ldp x21, x22, [sp, 32] // load x21, x22
 ldp x29, x30, [sp], 48 // load FP
 
 ret
