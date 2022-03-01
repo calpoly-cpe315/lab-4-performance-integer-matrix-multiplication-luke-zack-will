@@ -93,7 +93,7 @@ iloop:
 
 		*/
 
-    		mov x28, #25
+    		mov w28, #25
 
 
 		//end of kloop
