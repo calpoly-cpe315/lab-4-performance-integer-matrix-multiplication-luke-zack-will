@@ -116,8 +116,9 @@ iloop:
 
 		lsl x0, x0, #2 // index * 4 for array offset for ints
 		mov x1, x19 // store array in x1
-		bl intadd // now has element addr, switched in our add function in pace of add instrction
-		str x28, [x0] // store sum at mem location... c[prev calc]
+		bl intadd // addr + index offset
+		ldr x19, [sp, -88]
+		str w28, [x19, x0]
 
 
 
