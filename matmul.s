@@ -42,9 +42,9 @@ matmul:
 
 /*
     planning variables
-         sp88: C, result matrix
-         sp96: A, matrix A
-	 sp104: B, matrix B
+   x19: C, result matrix
+   x20: A, matrix A
+	 x21: B, matrix B
 	 x22: hA, height of matrix A
 	 x23: wA, width of matrix A, height of matrix B
 	 x24: wB, width of matrix B
@@ -55,9 +55,9 @@ matmul:
 
 */
     // save orig
-    str x0, [sp, 88]
-	 str x1, [sp, 96]
-	 str x2, [sp, 104]
+    mov x19, x0
+	 mov x20, x1
+	 mov x21, x2
     mov x22, x3
     mov x23, x4
     mov x24, x5
@@ -117,7 +117,6 @@ iloop:
 
 		lsl x0, x0, #2 // index * 4 for array offset for ints
 
-		ldr x19, [sp, 88]
 		str w28, [x19, x0]
 
 
