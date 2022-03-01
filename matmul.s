@@ -61,6 +61,8 @@ matmul:
     mov x22, x3
     mov x23, x4
     mov x24, x5
+    mov x28, #25
+
 
 mov x25, #0//zero i
 iloop:
@@ -91,9 +93,6 @@ iloop:
 		str x0, [sp, 8]//stores the value pulled from the first array
 
 		*/
-		mov x28, #25
-
-
 
 
 		//end of kloop
@@ -117,8 +116,8 @@ iloop:
 
 		lsl x0, x0, #2 // index * 4 for array offset for ints
 
-		ldr x19, [sp, 104]
-		str x28, [x19, x0]
+		ldr x19, [sp, 88]
+		str w28, [x19, x0]
 
 
 
