@@ -31,12 +31,13 @@
 	.arch armv8-a
 	.global matmul
 matmul:
-    stp x19, x20, [sp, -16]
-    stp x21, x22, [sp, -32]
-    stp x23, x24, [sp, -48]
-    stp x25, x26, [sp, -64]
-    stp x27, x28, [sp, -80]
-    stp x29, x30, [sp, -128]! // str FP, LR
+    stp x29, x30, [sp, -128]!
+	mov x29, sp
+	stp x19, x20, [sp, 16]
+	stp x21, x22, [sp, 32]
+	stp x23, x24, [sp, 48]
+	stp x25, x26, [sp, 64]
+	stp x27, x28, [sp, 80]
 
 
 /*
@@ -116,7 +117,7 @@ iloop:
 
 		lsl x0, x0, #2 // index * 4 for array offset for ints
 
-		ldr x19, [sp, -16]
+		ldr x19, [sp, 104]
 		str x28, [x19, x0]
 
 
