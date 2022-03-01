@@ -115,9 +115,8 @@ iloop:
 		bl intadd
 
 		lsl x0, x0, #2 // index * 4 for array offset for ints
-		mov x1, x19 // store array in x1
-		bl intadd // addr + index offset
-		ldr x19, [sp, -88]
+
+		ldr x19, [sp, -16]
 		str w28, [x19, x0]
 
 
@@ -156,3 +155,4 @@ ldp x27, x28, [sp, 80]
 ldp x29, x30, [sp], 96 // ld FP, LR
 
 ret
+
