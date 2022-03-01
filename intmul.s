@@ -5,9 +5,10 @@
 
 intmul:
 
-    stp x23, x24, [sp, -16] // registers not used by other ints
-    stp x25, x26, [sp, -32] // 26 is negative flag for x1
-    stp x29, x30, [sp, -48]!
+    stp x29, x30, [sp, 48]!
+    mov x29, sp
+    stp x23, x24, [sp, 16] // registers not used by other ints
+    stp x25, x26, [sp, 32] // 26 is negative flag for x1
 
     cmp x0, #0
     beq zero // check if 0
