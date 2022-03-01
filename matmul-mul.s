@@ -30,7 +30,7 @@
 
     .arch armv8-a
     .global matmul
-matmul:
+matmul-mul:
     stp x29, x30, [sp, -128]!
     mov x29, sp
     stp x19, x20, [sp, 16]
@@ -71,26 +71,20 @@ iloop:
 
 	    kloop:
             //        sum += A[i * wA + k] * B[k * wB + j];
-            mov x0, x25 // i
-            mov x1, x22 // wa
-            bl intmul //i * wa
+            mul x0, x25, x22 //i * wa
             mov x1, x27 // k
             bl intadd // +=k
             //x0 now has the index
             lsl x0, x0 , #2 //index * = int offset in array
             ldr w9, [x20, x0]//saves A[index x0] into x9
 
-            mov x0, x27 // k
-            mov x1, x24 // wB
-            bl intmul // k * wB
+            mul x0, x27, x24 // k * wB
             mov x1, x26 // j
             bl intadd // += j
             lsl x0, x0, #2//index shifted by int offset
             ldr w10, [x21, x0]//saves B[index x0] into x10
 
-            mov x0, x9
-            mov x1, x10
-            bl intmul // A[etc] * B[etc]
+            mul x0, x9, x10 // A[etc] * B[etc]
 
             mov x1, x28 // sum
             bl intadd // summate
@@ -110,9 +104,7 @@ iloop:
         endkloop:
             // C[i * wB + j] = sum;
                 // i * wB
-            mov x0, x25
-            mov x1, x24
-            bl intmul
+            mul x0, x25, x24
             // + j
             mov x1, x26
             bl intadd
