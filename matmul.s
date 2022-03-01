@@ -62,8 +62,6 @@ matmul:
     mov x23, x4
     mov x24, x5
 
-
-mov x25, #0//zero i
 iloop:
 
 
@@ -76,22 +74,33 @@ iloop:
 		mov x27, #0//zero k
 		kloop:
 
-/*
+
 		//        sum += A[i * wA + k] * B[k * wB + j];
-		mov x0, x25//i
-		mov x1, x22//wa
-		bl intmul//i * wa
-		mov x1, x27//k
-		bl intadd//+k
-		lsl x0, x0 , #2//index * = int offset in array
-		ldr x1, x20//store array in x1
-		bl intadd//now element addr
+		mov x0, x25 // i
+		mov x1, x22 // wa
+		bl intmul //i * wa
+		mov x1, x27 // k
+		bl intadd // +=k
+		lsl x0, x0 , #2 //index * = int offset in array
 
+		mov x6, x0 // store to B array
+                
+                mov x0, x27 // k
+		mov x1, x24 // wB
+		bl intmul // k * wB
+		mov x1, x26 // j
+		bl intadd // += j
+                lsl x0, x0, #2
 
-		//oh shit we need intermediate now
+		intmul x0, x6 // A[etc] * B[etc]
+
+		mov x1, x28 // sum
+		bl intadd // summate
+		mov x28, x0
+
 		str x0, [sp, 8]//stores the value pulled from the first array
 
-		*/
+		
 
     		mov w28, #25
 
@@ -106,8 +115,8 @@ iloop:
 		mov x27, x0
 		b kloop
 		endkloop:
-		//      C[i * wB + j] = sum;
-      // i * wB
+		// C[i * wB + j] = sum;
+                // i * wB
 		mov x0, x25
 		mov x1, x24
 		bl intmul
