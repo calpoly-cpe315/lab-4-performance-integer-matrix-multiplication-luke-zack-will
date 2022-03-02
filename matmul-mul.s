@@ -72,13 +72,13 @@ iloop:
 	    kloop:
             //        sum += A[i * wA + k] * B[k * wB + j];
             mul x0, x25, x22 //i * wa
-	    add x0, x0, x27
+	        add x0, x0, x27
             //x0 now has the index
             lsl x0, x0 , #2 //index * = int offset in array
             ldr w9, [x20, x0]//saves A[index x0] into x9
 
             mul x0, x24, x27
-	    add x0, x0, x26
+	        add x0, x0, x26
             lsl x0, x0, #2//index shifted by int offset
             ldr w10, [x21, x0]//saves B[index x0] into x10
 
@@ -86,41 +86,44 @@ iloop:
 	        add x28, x0, x28
 
 
-        //end of kloop
-        //k < Wa
-        cmp x27, x23
-        b.ge endkloop
-	add x0, x27, #1
-        mov x27, x0
+            //end of kloop
+            //k++
+            add x0, x27, #1
+            mov x27, x0
+            //k < Wa
+            cmp x27, x23
+            b.ge endkloop
+
         b kloop
 
         endkloop:
-            // C[i * wB + j] = sum;
-                // i * wB
-            mul x0, x25, x24
-            // + j
-	    add x0, x0, x26
-            lsl x0, x0, #2 // index * 4 for array offset for ints
+        // C[i * wB + j] = sum;
+        // i * wB
+        mul x0, x25, x24
+        // + j
+        add x0, x0, x26
+        lsl x0, x0, #2 // index * 4 for array offset for ints
 
-            str w28, [x19, x0]
+        str w28, [x19, x0]
 
-    //end of jloop
-    //j < Wa
-    cmp x26, x24
-    b.ge endjloop
-    //j++
-    add x0, x26, #1
-    mov x26, x0
+        //end of jloop
+        //j++
+        add x0, x26, #1
+        mov x26, x0
+        //j < Wa
+        cmp x26, x24
+        b.ge endjloop
+
     b jloop
     endjloop:
-         //end of iloop
-	 //i < Ha
-	 cmp x25, x22
-         b.ge ending
+    //end of iloop
+    //i++
+    add x0, x25, #1
+    mov x25, x0
+	//i < Ha
+	cmp x25, x22
+    b.ge ending
 
-//i++
-add x0, x25, #1
-mov x25, x0
 b iloop
 
 ending:
