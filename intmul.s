@@ -19,6 +19,7 @@ intmul:
     cmp x0, x1
     bgt swapskip // if greater don't use as incrementor
 
+    // swap
     mov x23, x1
     mov x1, x0
     mov x0, x23 
@@ -33,10 +34,10 @@ intmul:
     resume1:
     mov x25, #0 // set them equal for the adding
 loop:
+    // see if its even
     and x26, x24, #1
     cmp x26, #0
     beq bigdiv
-
 
     mov x0, x25
     mov x1, x23
@@ -69,6 +70,7 @@ neg:
     mov x24, x0
     b resume1
 
+// divides by two
 bigdiv:
     lsl x23, x23, #1
     lsr x24, x24, #1
