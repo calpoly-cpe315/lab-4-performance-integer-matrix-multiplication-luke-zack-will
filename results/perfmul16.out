@@ -1,0 +1,21 @@
+Printing Result Matrix:
+******************************************************
+Done.
+
+ Performance counter stats for './mm':
+
+              1.10 msec task-clock:u              #    0.126 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+                27      page-faults:u             #    0.025 M/sec                  
+            832772      cycles:u                  #    0.760 GHz                    
+            416715      instructions:u            #    0.50  insn per cycle         
+             48406      branches:u                #   44.185 M/sec                  
+              8077      branch-misses:u           #   16.69% of all branches        
+
+       0.008700837 seconds time elapsed
+
+       0.001947000 seconds user
+       0.000000000 seconds sys
+
+
