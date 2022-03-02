@@ -61,7 +61,7 @@ matmul:
     mov x22, x3
     mov x23, x4
     mov x24, x5
-
+mov x25, #0
 iloop:
     mov x26, #0//zero j
 
@@ -83,8 +83,7 @@ iloop:
             ldr w10, [x21, x0]//saves B[index x0] into x10
 
             mul x0, x9, x10 // A[etc] * B[etc]
-	    add x0, x0, x28
-            mov x28, x0//should be math'd out right
+	        add x28, x0, x28
 
 
         //end of kloop
