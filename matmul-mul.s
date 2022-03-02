@@ -77,6 +77,7 @@ iloop:
             lsl x0, x0 , #2 //index * = int offset in array
             ldr w9, [x20, x0]//saves A[index x0] into x9
 
+            mul x0, x24, x27
 	    add x0, x0, x26
             lsl x0, x0, #2//index shifted by int offset
             ldr w10, [x21, x0]//saves B[index x0] into x10
