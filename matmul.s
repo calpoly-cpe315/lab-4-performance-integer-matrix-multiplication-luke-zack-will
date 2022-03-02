@@ -61,7 +61,7 @@ matmul:
     mov x22, x3
     mov x23, x4
     mov x24, x5
-
+mov x25, #0
 iloop:
     mov x26, #0//zero j
 
@@ -71,77 +71,78 @@ iloop:
 
 	    kloop:
             //        sum += A[i * wA + k] * B[k * wB + j];
-            mov x0, x25 // i
-            mov x1, x22 // wa
-            bl intmul //i * wa
-            mov x1, x27 // k
-            bl intadd // +=k
+            mov x0, x25
+            mov x1, x22
+            bl intmul//i * wa
+            mov x1, x27
+	        bl intadd
             //x0 now has the index
             lsl x0, x0 , #2 //index * = int offset in array
             ldr w9, [x20, x0]//saves A[index x0] into x9
 
-            mov x0, x27 // k
-            mov x1, x24 // wB
-            bl intmul // k * wB
-            mov x1, x26 // j
-            bl intadd // += j
+            mov x0 x24
+            mov x1, x27
+            bl intmul
+            mov x1, x26
+	        bl intadd
             lsl x0, x0, #2//index shifted by int offset
             ldr w10, [x21, x0]//saves B[index x0] into x10
 
             mov x0, x9
             mov x1, x10
-            bl intmul // A[etc] * B[etc]
+            bl intmul// A[etc] * B[etc]
+            mov x1, x28
+            bl intadd
+	        mov x28, x0
 
-            mov x1, x28 // sum
-            bl intadd // summate
-            mov x28, x0//should be math'd out right
 
+            //end of kloop
+            //k++
+            mov x0, x27
+            mov x1, #1
+            bl intadd
+            mov x27, x0
+            //k < Wa
+            cmp x27, x23
+            b.ge endkloop
 
-        //end of kloop
-        //k < Wa
-        cmp x27, x23
-        b.ge endkloop
-        mov x0, x27
-        mov x1, #1
-        bl intadd
-        mov x27, x0
         b kloop
 
         endkloop:
-            // C[i * wB + j] = sum;
-                // i * wB
-            mov x0, x25
-            mov x1, x24
-            bl intmul
-            // + j
-            mov x1, x26
-            bl intadd
+        // C[i * wB + j] = sum;
+        // i * wB
+        mov x0, x25
+        mov x1, x24
+        bl intmul
+        // + j
+        mov x1, x26
+        bl intadd
+        lsl x0, x0, #2 // index * 4 for array offset for ints
 
-            lsl x0, x0, #2 // index * 4 for array offset for ints
+        str w28, [x19, x0]
 
-            str w28, [x19, x0]
+        //end of jloop
+        //j++
+        mov x0, x26
+        mov x1, #1
+        bl intadd
+        mov x26, x0
+        //j < Wa
+        cmp x26, x24
+        b.ge endjloop
 
-    //end of jloop
-    //j < Wa
-    cmp x26, x24
-    b.ge endjloop
-    //j++
-    mov x0, x26
-    mov x1, #1
-    bl intadd
-    mov x26, x0
     b jloop
     endjloop:
-         //end of iloop
-	 //i < Ha
-	 cmp x25, x22
-         b.ge ending
+    //end of iloop
+    //i++
+    mov x0, x25
+    mov x1, #1
+    bl intadd
+    mov x25, x0
+	//i < Ha
+	cmp x25, x22
+    b.ge ending
 
-//i++
-mov x0, x25
-mov x1, #1
-bl intadd
-mov x25, x0
 b iloop
 
 ending:
