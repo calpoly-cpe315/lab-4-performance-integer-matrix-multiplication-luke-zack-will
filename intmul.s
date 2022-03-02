@@ -33,6 +33,11 @@ intmul:
     resume1:
     mov x25, #0 // set them equal for the adding
 loop:
+    and x26, x24, #1
+    cmp x26, #0
+    beq bigdiv
+
+
     mov x0, x25
     mov x1, x23
     bl intadd // addition fnc
@@ -63,6 +68,11 @@ neg:
     bl intsub
     mov x24, x0
     b resume1
+
+bigdiv:
+    lsl x23, x23, #1
+    lsr x24, x24, #1
+    b loop
 
 end:
 
