@@ -80,7 +80,7 @@ iloop:
             lsl x0, x0 , #2 //index * = int offset in array
             ldr w9, [x20, x0]//saves A[index x0] into x9
 
-            mov x0 x24
+            mov x0, x24
             mov x1, x27
             bl intmul
             mov x1, x26
